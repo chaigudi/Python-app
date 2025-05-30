@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      IMAGE_NAME: your-dockerhub-username/your-app-name
+      IMAGE_NAME: chaithu0011/python-app
 
     steps:
       - name: Checkout code
@@ -51,3 +51,5 @@ jobs:
       - name: Deploy to EKS
         run: |
           kubectl apply -f k8s/deployment.yaml
+          kubectl apply -f k8s/service.yaml
+          kubectl apply -f k8s/ingress.yaml
