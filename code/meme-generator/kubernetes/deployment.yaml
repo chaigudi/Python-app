@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: meme-Deployment
+  labels: 
+    app: meme-Deployment
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: meme-Deployment
+  template:
+    metadata:
+      labels:
+        app: meme-Deployment
+    spec:
+      containers:
+        - name: meme-app
+          image: chaithu0011/python-app:latest
+          ports:
+            - containerPort: 5000
+              protocol: TCP
+          resources:
+            limits:
+              memory: "128Mi"
