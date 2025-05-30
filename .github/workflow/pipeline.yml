@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      IMAGE_NAME: your-dockerhub-username/your-app-name
+      IMAGE_NAME: chaithu0011/python-app
 
     steps:
       - name: Checkout code
