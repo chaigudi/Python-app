@@ -106,6 +106,16 @@ variable "node_groups" {
       capacity_type  = "ON_DEMAND"
       disk_size      = 20
     }
+    # Example of additional node group
+    # spot = {
+    #   instance_types = ["t3.medium", "t3.large"]
+    #   min_size       = 0
+    #   max_size       = 5
+    #   desired_size   = 2
+    #   ami_type       = "AL2_x86_64"
+    #   capacity_type  = "SPOT"
+    #   disk_size      = 30
+    # }
   }
 }
 
