@@ -106,7 +106,6 @@ variable "node_groups" {
       capacity_type  = "ON_DEMAND"
       disk_size      = 20
     }
-   }
   }
 }
 
