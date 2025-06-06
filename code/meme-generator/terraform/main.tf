@@ -45,7 +45,7 @@ module "vpc" {
 # EKS Module
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
-  version = "20.13.0"
+  version = "20.24.0"  # Updated to newer version to fix deprecation warnings
 
   cluster_name    = var.cluster_name
   cluster_version = var.cluster_version
@@ -66,7 +66,8 @@ module "eks" {
 
   eks_managed_node_groups = {
     for k, v in var.node_groups : k => {
-      name           = "${var.cluster_name}-${k}"
+      # Shortened name to avoid length limits
+      name           = "${substr(var.cluster_name, 0, 15)}-${k}"
       instance_types = v.instance_types
       
       min_size     = v.min_size
@@ -91,7 +92,7 @@ module "eks" {
       tags = merge(
         var.common_tags,
         {
-          Name         = "${var.cluster_name}-${k}-node-group"
+          Name         = "${substr(var.cluster_name, 0, 15)}-${k}-ng"
           NodeGroup    = k
         }
       )
@@ -102,7 +103,7 @@ module "eks" {
       instance_tags = merge(
         var.common_tags,
         {
-          Name                = "${var.cluster_name}-${k}-worker-node"
+          Name                = "${substr(var.cluster_name, 0, 15)}-${k}-node"
           NodeGroup          = k
           "kubernetes.io/cluster/${var.cluster_name}" = "owned"
           "k8s.io/cluster-autoscaler/enabled"         = "true"
@@ -120,7 +121,7 @@ module "aws_load_balancer_controller_irsa_role" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
   version = "5.34.0"
 
-  role_name = "${var.cluster_name}-aws-load-balancer-controller"
+  role_name = "${substr(var.cluster_name, 0, 20)}-alb-controller"
 
   attach_load_balancer_controller_policy = true
 
