@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: meme-Deployment
+  name: meme-deployment
   labels: 
-    app: meme-Deployment
+    app: meme-deployment
 spec:
   replicas: 4
   selector:
     matchLabels:
-      app: meme-Deployment
+      app: meme-deployment
   template:
     metadata:
       labels:
-        app: meme-Deployment #
+        app: meme-deployment #
     spec:
       containers:
         - name: meme-app
